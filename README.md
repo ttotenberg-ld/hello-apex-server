@@ -13,27 +13,30 @@ This guide requires you to install the [Salesforce CLI](https://developer.salesf
 ```bash
 git clone https://github.com/launchdarkly/apex-server-sdk.git
 ```
+2. Authenticate to Salesforce in the terminal.
 
-2. Deploy the SDK to Salesforce.
+```bash
+sfdx auth:web:login -a YOUR_TARGET_ORG
+```
+
+3. Deploy the SDK to Salesforce.
 
 ```bash
 cd apex-server-sdk
 sfdx force:source:deploy --targetusername='YOUR TARGET ORG' --sourcepath='force-app'
 ```
 
-3. Build the Salesforce LaunchDarkly bridge.
+4. Build the Salesforce LaunchDarkly bridge.
 
 ```bash
-cd apex-server-sdk/bridge
+cd bridge
 go build .
 ```
 
-4. Set the environment variable `LD_SDK_KEY` to your LaunchDarkly SDK key. Set environment variables for your Salesforce account.
-5. Start the Salesforce bridge.
+5. Set the environment variable `LD_SDK_KEY` to your LaunchDarkly SDK key. Set environment variables for your Salesforce account.
+6. Start the Salesforce bridge.
 
 ```bash
-cd apex-server-sdk/bridge
-
 export LD_SDK_KEY='Your LaunchDarkly SDK key'
 export SALESFORCE_URL='Your Salesforce Apex REST URL'
 export OAUTH_ID='Your Salesforce OAuth Id'
@@ -44,13 +47,19 @@ export OAUTH_PASSWORD='Your Salesforce password + security token'
 ./bridge
 ```
 
-5. If there is an existing boolean feature flag in your LaunchDarkly project that you want to evaluate, edit `hello.apex` and set the value of `flagKey` to the flag key.
+7. If there is an existing boolean feature flag in your LaunchDarkly project that you want to evaluate, edit `hello.apex` and set the value of `flagKey` to the flag key.
 
 ```java
 String flagKey = 'my-boolean-flag';
 ```
 
-6. Use the SDK with `hello.apex`
+8. Open a new terminal window, and authenticate to Salesforce.
+
+```bash
+sfdx auth:web:login -a YOUR_TARGET_ORG
+```
+
+9. Navigate to your root project directory and use the SDK with `hello.apex`
 
 ```bash
 sfdx force:apex:execute --targetusername='YOUR TARGET ORG' --apexcodefile='hello.apex'
