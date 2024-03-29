@@ -9,10 +9,6 @@ LDClient client = new LDClient(config);
 
 // Set up the user properties. This user should appear on your LaunchDarkly users
 // dashboard soon after you run the demo.
-LDUser user = new LDUser.Builder('example-user-key')
-    .setName('Sandy')
-    .build();
-
 LDUser dev_user = new LDUser.Builder('5de6fc8b62da8a3d7fc41402624f2319')
     .setFirstName('Ernestina')
     .setLastName('Evans')
@@ -65,13 +61,13 @@ LDUser ga_user = new LDUser.Builder('5678zyxw')
     )
     .build();
 
-Boolean value = client.boolVariation(user, flagKey, false);
+
 Boolean dev_value = client.boolVariation(dev_user, flagKey, false);
 Boolean qa_value = client.boolVariation(qa_user, flagKey, false);
 Boolean uat_value = client.boolVariation(uat_user, flagKey, false);
 Boolean ga_value = client.boolVariation(ga_user, flagKey, false);
 
-System.debug('Feature flag is '+value+' for generics.');
+
 System.debug('Feature flag is '+dev_value+' for devs.');
 System.debug('Feature flag is '+qa_value+' for QA.');
 System.debug('Feature flag is '+uat_value+' for UAT.');
